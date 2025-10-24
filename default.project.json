@@ -1,0 +1,7 @@
+{
+	"name": "TT3 SDK",
+	"emitLegacyScripts": false,
+	"tree": {
+		"$path": "Source"
+	}
+}
