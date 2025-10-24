@@ -9,7 +9,7 @@ export type Padding = {
 
 export type BaseGuiParams = {
 	Name: string?,
-	Parent: Instance?,
+	Parent: Instance | false,
 
 	Transparency: number?,
 	ZIndex: number?,
@@ -29,8 +29,6 @@ export type BaseGuiParams = {
 	Padding: Padding?,
 
 	Style: Style.Style | false?,
-
-	[any]: never,
 }
 
 local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
@@ -80,7 +78,9 @@ local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
 		Style(gui, params.Style)
 	end
 
-	gui.Parent = params.Parent
+	if params.Parent then
+		gui.Parent = params.Parent
+	end
 
 	return gui
 end

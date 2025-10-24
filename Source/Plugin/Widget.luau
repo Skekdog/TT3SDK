@@ -1,5 +1,6 @@
 local GetPlugin = require("../Lib/GetPlugin")
 local Frame = require("../Lib/UI/Components/Frame")
+local TextLabel = require("../Lib/UI/Components/TextLabel")
 
 local plugin = GetPlugin
 
@@ -24,9 +25,13 @@ widget.Enabled = false
 local frame = Frame({
 	Parent = widget,
 	CornerRadius = false,
-	Style = {
-		BackgroundColor3 = Enum.StudioStyleGuideColor.ButtonText,
-	}
+})
+
+local title = TextLabel({
+	Size = UDim2.fromScale(1, 0.1),
+	NoStroke = true,
+	Text = "<b>Traitor Town 3 SDK</b>",
+	Parent = frame,
 })
 
 function module.ToggleWidget(enabled: boolean?): ()
