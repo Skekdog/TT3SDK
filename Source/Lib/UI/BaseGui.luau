@@ -7,6 +7,11 @@ export type Padding = {
 	Bottom: UDim | number?,
 }
 
+export type SizeConstraints = {
+	Min: Vector2?,
+	Max: Vector2?,
+}
+
 export type BaseGuiParams = {
 	Name: string?,
 	Parent: Instance | false,
@@ -28,6 +33,8 @@ export type BaseGuiParams = {
 	NoStroke: boolean?,
 	Padding: Padding?,
 
+	SizeConstraints: SizeConstraints?,
+
 	Style: Style.Style | false?,
 }
 
@@ -45,7 +52,20 @@ local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
 
 	gui.ClipsDescendants = if typeof(params.ClipsDescendants) == "boolean" then params.ClipsDescendants else true
 
-	gui.Size = params.Size or UDim2.fromScale(1, 1)
+	if not params.Size then
+		if params.AutomaticSize == Enum.AutomaticSize.Y then
+			gui.Size = UDim2.fromScale(1, 0)
+		elseif params.AutomaticSize == Enum.AutomaticSize.X then
+			gui.Size = UDim2.fromScale(0, 1)
+		elseif params.AutomaticSize == Enum.AutomaticSize.XY then
+			gui.Size = UDim2.fromScale(0, 0)
+		else
+			gui.Size = UDim2.fromScale(1, 1)
+		end
+	else
+		gui.Size = params.Size
+	end
+
 	gui.AutomaticSize = params.AutomaticSize or Enum.AutomaticSize.None
 
 	if params.CornerRadius ~= false then
@@ -72,6 +92,13 @@ local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
 		padding.PaddingTop = if typeof(params.Padding.Top) == "number" then UDim.new(0, params.Padding.Top) else params.Padding.Top or UDim.new(0, 0)
 		padding.PaddingBottom = if typeof(params.Padding.Bottom) == "number" then UDim.new(0, params.Padding.Bottom) else params.Padding.Bottom or UDim.new(0, 0)
 		padding.Parent = gui
+	end
+
+	if params.SizeConstraints then
+		local constraints = Instance.new("UISizeConstraint")
+		constraints.MinSize = params.SizeConstraints.Min or Vector2.new(0, 0)
+		constraints.MaxSize = params.SizeConstraints.Max or Vector2.new(math.huge, math.huge)
+		constraints.Parent = gui
 	end
 
 	if params.Style ~= false then

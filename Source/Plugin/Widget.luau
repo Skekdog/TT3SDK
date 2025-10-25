@@ -40,10 +40,9 @@ do
 end
 
 local title = TextLabel({
-	Size = UDim2.fromScale(1, 0),
 	NoStroke = true,
 	Text = "<b>Traitor Town 3 SDK</b>",
-	FontSize = 28,
+	FontSize = 32,
 	AutomaticSize = Enum.AutomaticSize.Y,
 	TextTruncate = Enum.TextTruncate.AtEnd,
 	Parent = frame,
@@ -63,14 +62,10 @@ local actionsFrame = Frame({
 	Parent = frame,
 })
 
-do
-	local gridLayout = Instance.new("UIGridLayout")
-	gridLayout.CellSize = UDim2.fromScale(1, 0.1)
-	gridLayout.Parent = actionsFrame
-end
-
 local loadTemplateButton = TextButton({
 	Text = "Load Template",
+	FontSize = 24,
+	AutomaticSize = Enum.AutomaticSize.Y,
 	Parent = actionsFrame,
 })
 
