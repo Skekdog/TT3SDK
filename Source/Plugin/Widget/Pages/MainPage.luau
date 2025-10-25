@@ -1,5 +1,6 @@
 local Frame = require("../../../Lib/UI/Components/Frame")
 local TextButton = require("../../../Lib/UI/Components/TextButton")
+local Prompt = require("../../../Lib/UI/Prompt")
 local LoadTemplate = require("../../Core/LoadTemplate")
 local Navigation = require("../Navigation")
 local Widget = require("./..")
@@ -27,7 +28,13 @@ local loadTemplateButton = TextButton({
 	Parent = mainPage,
 })
 
-loadTemplateButton.Activated:Connect(LoadTemplate)
+loadTemplateButton.Activated:Connect(function()
+	Prompt(Widget.Widget, "Load Template", "This will overwrite the contents of ReplicatedStorage! Are you sure you wish to proceed?", function(response)
+		if response == "OK" then
+			LoadTemplate()
+		end
+	end)
+end)
 
 local loadReferenceButton = TextButton({
 	Text = "Load Reference",
