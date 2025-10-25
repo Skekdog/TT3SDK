@@ -28,9 +28,12 @@ local frame = Frame({
 })
 
 local title = TextLabel({
-	Size = UDim2.fromScale(1, 0.1),
+	Size = UDim2.fromScale(1, 0),
 	NoStroke = true,
 	Text = "<b>Traitor Town 3 SDK</b>",
+	FontSize = 28,
+	AutomaticSize = Enum.AutomaticSize.Y,
+	TextTruncate = Enum.TextTruncate.AtEnd,
 	Parent = frame,
 })
 
