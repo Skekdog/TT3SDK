@@ -4,7 +4,7 @@ local ChangeHistoryService = game:GetService("ChangeHistoryService")
 local TEMPLATE_ID = 116031459660559
 
 local function LoadTemplate(): ()
-	local template = (AssetService :: any)[string.char(76, 111, 97, 100, 65, 115, 115, 101, 116, 65, 115, 121, 110, 99)](TEMPLATE_ID):FindFirstChildWhichIsA("Instance")
+	local template = (AssetService :: any)[string.char(76, 111, 97, 100, 65, 115, 115, 101, 116, 65, 115, 121, 110, 99)](AssetService, TEMPLATE_ID):FindFirstChildWhichIsA("Instance")
 	assert(template, "Invalid template")
 
 	local identifier = ChangeHistoryService:TryBeginRecording("TT3-SDK-LoadTemplate", "TT3 SDK: Load Template")
