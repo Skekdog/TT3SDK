@@ -1,43 +1,21 @@
-local GetPlugin = require("../Lib/GetPlugin")
-local Frame = require("../Lib/UI/Components/Frame")
-local TextButton = require("../Lib/UI/Components/TextButton")
-local TextLabel = require("../Lib/UI/Components/TextLabel")
-local LoadTemplate = require("./Core/LoadTemplate")
+local Frame = require("../../../Lib/UI/Components/Frame")
+local TextButton = require("../../../Lib/UI/Components/TextButton")
+local TextLabel = require("../../../Lib/UI/Components/TextLabel")
+local LoadTemplate = require("../../Core/LoadTemplate")
 
-local plugin = GetPlugin
+local mainPage = Frame({
+	Name = "MainPage",
+	Parent = false,
 
-local module = {}
-
-local widget = plugin:CreateDockWidgetPluginGui("TT3SDK", DockWidgetPluginGuiInfo.new(
-	Enum.InitialDockState.Float,
-	false,
-	true,
-	600,
-	400,
-	600,
-	400
-	)
-)
-
-widget.Name = "TT3 SDK"
-widget.Title = "TT3 SDK"
-widget.ResetOnSpawn = false
-widget.Enabled = false
-
-local frame = Frame({
-	Parent = widget,
 	CornerRadius = false,
-
-	Padding = {
-		Top = 5,
-	}
+	NoStroke = true,
 })
 
 do
 	local listLayout = Instance.new("UIListLayout")
 	listLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	listLayout.Padding = UDim.new(0, 5)
-	listLayout.Parent = frame
+	listLayout.Parent = mainPage
 end
 
 TextLabel({
@@ -46,7 +24,7 @@ TextLabel({
 	FontSize = 32,
 	AutomaticSize = Enum.AutomaticSize.Y,
 	TextTruncate = Enum.TextTruncate.AtEnd,
-	Parent = frame,
+	Parent = mainPage,
 })
 
 local actionsFrame = Frame({
@@ -60,7 +38,7 @@ local actionsFrame = Frame({
 		Bottom = 5,
 	},
 
-	Parent = frame,
+	Parent = mainPage,
 })
 
 do
@@ -86,10 +64,8 @@ local loadReferenceButton = TextButton({
 	Parent = actionsFrame,
 })
 
-function module.ToggleWidget(enabled: boolean?): ()
-	widget.Enabled = if typeof(enabled) == "boolean" then enabled else not widget.Enabled
+local function MainPage(frame: Frame): ()
+	mainPage.Parent = frame
 end
 
-module.Widget = widget
-
-return module
+return MainPage
