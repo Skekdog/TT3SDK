@@ -62,8 +62,22 @@ local actionsFrame = Frame({
 	Parent = frame,
 })
 
+do
+	local listLayout = Instance.new("UIListLayout")
+	listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	listLayout.Padding = UDim.new(0, 5)
+	listLayout.Parent = actionsFrame
+end
+
 local loadTemplateButton = TextButton({
 	Text = "Load Template",
+	FontSize = 24,
+	AutomaticSize = Enum.AutomaticSize.Y,
+	Parent = actionsFrame,
+})
+
+local loadReferenceButton = TextButton({
+	Text = "Load Reference",
 	FontSize = 24,
 	AutomaticSize = Enum.AutomaticSize.Y,
 	Parent = actionsFrame,
