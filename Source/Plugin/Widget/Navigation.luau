@@ -1,5 +1,5 @@
 local Frame = require("../../Lib/UI/Components/Frame")
-local TextButton = require("../../Lib/UI/Components/TextButton")
+local ImageButton = require("../../Lib/UI/Components/ImageButton")
 local TextLabel = require("../../Lib/UI/Components/TextLabel")
 
 local Navigation = {}
@@ -23,11 +23,19 @@ local title = TextLabel({
 })
 
 local lastPage: Frame?
-local backButton = TextButton({
-	Text = "Back",
+local backButton = ImageButton({
+	Image = Content.fromAssetId(80230791232326),
 	Parent = Navigation.NavBar,
 	Size = UDim2.fromScale(0.1, 1),
+	AspectRatio = {
+		Ratio = 1,
+	},
+	IsContainer = true,
 	Visible = false,
+
+	Style = {
+		ImageColor3 = Enum.StudioStyleGuideColor.MainText,
+	},
 })
 
 local pageLayout = Instance.new("UIPageLayout")

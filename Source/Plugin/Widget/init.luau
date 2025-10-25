@@ -25,8 +25,11 @@ local frame = Frame({
 	IsContainer = true,
 
 	Padding = {
+		Left = 5,
+		Right = 5,
 		Top = 5,
-	}
+		Bottom = 5,
+	},
 })
 
 local pages = Frame({

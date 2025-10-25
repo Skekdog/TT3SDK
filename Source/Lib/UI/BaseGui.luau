@@ -12,6 +12,12 @@ export type SizeConstraints = {
 	Max: Vector2?,
 }
 
+export type AspectRatio = {
+	Ratio: number,
+	Type: Enum.AspectType?,
+	Axis: Enum.DominantAxis?,
+}
+
 export type BaseGuiParams = {
 	Name: string?,
 	Parent: Instance | false,
@@ -35,6 +41,7 @@ export type BaseGuiParams = {
 	Padding: Padding?,
 
 	SizeConstraints: SizeConstraints?,
+	AspectRatio: AspectRatio?,
 
 	Style: Style.Style | false?,
 }
@@ -89,7 +96,7 @@ local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
 		stroke.Parent = gui
 
 		if params.Style ~= false then
-			Style(stroke, params.Style)
+			Style(stroke)
 		end
 	end
 
@@ -107,6 +114,14 @@ local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
 		constraints.MinSize = params.SizeConstraints.Min or Vector2.new(0, 0)
 		constraints.MaxSize = params.SizeConstraints.Max or Vector2.new(math.huge, math.huge)
 		constraints.Parent = gui
+	end
+
+	if params.AspectRatio then
+		local aspectRatio = Instance.new("UIAspectRatioConstraint")
+		aspectRatio.AspectRatio = params.AspectRatio.Ratio
+		aspectRatio.AspectType = params.AspectRatio.Type or Enum.AspectType.ScaleWithParentSize
+		aspectRatio.DominantAxis = params.AspectRatio.Axis or Enum.DominantAxis.Height
+		aspectRatio.Parent = gui
 	end
 
 	if params.Style ~= false then
