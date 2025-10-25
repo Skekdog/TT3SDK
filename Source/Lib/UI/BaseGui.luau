@@ -1,10 +1,10 @@
 local Style = require("./Style")
 
 export type Padding = {
-	Left: UDim?,
-	Right: UDim?,
-	Top: UDim?,
-	Bottom: UDim?,
+	Left: UDim | number?,
+	Right: UDim | number?,
+	Top: UDim | number?,
+	Bottom: UDim | number?,
 }
 
 export type BaseGuiParams = {
@@ -61,16 +61,16 @@ local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
 		stroke.Parent = gui
 
 		if params.Style ~= false then
-			Style(gui, params.Style)
+			Style(stroke, params.Style)
 		end
 	end
 
 	if params.Padding then
 		local padding = Instance.new("UIPadding")
-		padding.PaddingLeft = params.Padding.Left or UDim.new(0, 0)
-		padding.PaddingRight = params.Padding.Right or UDim.new(0, 0)
-		padding.PaddingTop = params.Padding.Top or UDim.new(0, 0)
-		padding.PaddingBottom = params.Padding.Bottom or UDim.new(0, 0)
+		padding.PaddingLeft = if typeof(params.Padding.Left) == "number" then UDim.new(0, params.Padding.Left) else params.Padding.Left or UDim.new(0, 0)
+		padding.PaddingRight = if typeof(params.Padding.Right) == "number" then UDim.new(0, params.Padding.Right) else params.Padding.Right or UDim.new(0, 0)
+		padding.PaddingTop = if typeof(params.Padding.Top) == "number" then UDim.new(0, params.Padding.Top) else params.Padding.Top or UDim.new(0, 0)
+		padding.PaddingBottom = if typeof(params.Padding.Bottom) == "number" then UDim.new(0, params.Padding.Bottom) else params.Padding.Bottom or UDim.new(0, 0)
 		padding.Parent = gui
 	end
 
