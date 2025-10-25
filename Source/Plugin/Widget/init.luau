@@ -1,3 +1,5 @@
+local ChangePage = require("@self/ChangePage")
+local MainPage = require("@self/Pages/MainPage")
 local GetPlugin = require("../Lib/GetPlugin")
 local Frame = require("../Lib/UI/Components/Frame")
 
@@ -35,8 +37,6 @@ end
 
 Widget.Widget = widget
 
-for _, page in script.Pages:GetChildren() do
-	(require :: any)(page)(frame)
-end
+ChangePage(MainPage(frame))
 
 return Widget

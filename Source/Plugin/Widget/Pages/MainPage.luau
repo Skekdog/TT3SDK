@@ -2,6 +2,7 @@ local Frame = require("../../../Lib/UI/Components/Frame")
 local TextButton = require("../../../Lib/UI/Components/TextButton")
 local TextLabel = require("../../../Lib/UI/Components/TextLabel")
 local LoadTemplate = require("../../Core/LoadTemplate")
+local ChangePage = require("../ChangePage")
 
 local mainPage = Frame({
 	Name = "MainPage",
@@ -64,8 +65,11 @@ local loadReferenceButton = TextButton({
 	Parent = actionsFrame,
 })
 
-local function MainPage(frame: Frame): ()
+ChangePage(mainPage)
+
+local function MainPage(frame: Frame): Frame
 	mainPage.Parent = frame
+	return mainPage
 end
 
 return MainPage
