@@ -37,6 +37,10 @@ local pages = Frame({
 	Parent = frame,
 	LayoutOrder = 2,
 
+	Padding = {
+		Top = 5,
+	},
+
 	IsContainer = true,
 })
 

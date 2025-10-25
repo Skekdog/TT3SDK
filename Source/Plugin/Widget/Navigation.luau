@@ -22,20 +22,46 @@ local title = TextLabel({
 	Parent = Navigation.NavBar,
 })
 
+local controlsFrame = Frame({
+	Name = "Controls",
+	Parent = Navigation.NavBar,
+	IsContainer = true,
+	AspectRatio = {
+		Ratio = 2,
+	},
+	AutomaticSize = Enum.AutomaticSize.X,
+})
+
+do
+	local listLayout = Instance.new("UIListLayout")
+	listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	listLayout.Padding = UDim.new(0, 5)
+	listLayout.FillDirection = Enum.FillDirection.Horizontal
+	listLayout.Parent = controlsFrame
+end
+
 local lastPage: Frame?
 local backButton = ImageButton({
 	Image = Content.fromAssetId(80230791232326),
-	Parent = Navigation.NavBar,
-	Size = UDim2.fromScale(0.1, 1),
-	AspectRatio = {
-		Ratio = 1,
-	},
+	Parent = controlsFrame,
+	Size = UDim2.fromScale(0.5, 1),
+	LayoutOrder = 2,
 	IsContainer = true,
 	Visible = false,
 
 	Style = {
 		ImageColor3 = Enum.StudioStyleGuideColor.MainText,
 	},
+})
+
+local homeButton = ImageButton({
+	Image = Content.fromAssetId(18923169473),
+	Parent = controlsFrame,
+	Size = UDim2.fromScale(0.5, 1),
+	AspectRatio = {
+		Ratio = 1,
+	},
+	IsContainer = true,
 })
 
 local pageLayout = Instance.new("UIPageLayout")
@@ -45,9 +71,14 @@ pageLayout.EasingStyle = Enum.EasingStyle.Exponential
 pageLayout.EasingDirection = Enum.EasingDirection.In
 pageLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
+local firstPage: Frame?
 function Navigation.SetPage(page: Frame): ()
 	if not pageLayout.Parent then
 		pageLayout.Parent = page.Parent
+	end
+
+	if not firstPage then
+		firstPage = page
 	end
 
 	title.Text = "<b>" .. page.Name .. "</b>"
@@ -65,6 +96,11 @@ end
 backButton.Activated:Connect(function()
 	assert(lastPage, "No last page")
 	Navigation.SetPage(lastPage)
+end)
+
+homeButton.Activated:Connect(function()
+	assert(firstPage, "No first page")
+	Navigation.SetPage(firstPage)
 end)
 
 return Navigation
