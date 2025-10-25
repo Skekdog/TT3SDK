@@ -26,6 +26,7 @@ local lastPage: Frame?
 local backButton = TextButton({
 	Text = "Back",
 	Parent = Navigation.NavBar,
+	Size = UDim2.fromScale(0.1, 1),
 	Visible = false,
 })
 
@@ -34,17 +35,23 @@ pageLayout.Circular = true
 pageLayout.TweenTime = 0.2
 pageLayout.EasingStyle = Enum.EasingStyle.Exponential
 pageLayout.EasingDirection = Enum.EasingDirection.In
+pageLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 function Navigation.SetPage(page: Frame): ()
-	title.Text = "<b>" .. page.Name .. "</b>"
-	backButton.Visible = lastPage ~= nil
-
-	lastPage = page
-
 	if not pageLayout.Parent then
 		pageLayout.Parent = page.Parent
 	end
+
+	title.Text = "<b>" .. page.Name .. "</b>"
+
+	lastPage = pageLayout.CurrentPage :: Frame?
+	if page == lastPage then
+		return
+	end
+
 	pageLayout:JumpTo(page)
+
+	backButton.Visible = lastPage ~= nil
 end
 
 backButton.Activated:Connect(function()

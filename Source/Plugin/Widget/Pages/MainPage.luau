@@ -3,10 +3,12 @@ local TextButton = require("../../../Lib/UI/Components/TextButton")
 local LoadTemplate = require("../../Core/LoadTemplate")
 local Navigation = require("../Navigation")
 local Widget = require("./..")
+local References = require("./References")
 
 local mainPage = Frame({
 	Name = "Traitor Town 3 SDK",
-	Parent = false,
+	LayoutOrder = -1,
+	Parent = Widget.Pages,
 
 	CornerRadius = false,
 	NoStroke = true,
@@ -56,8 +58,10 @@ local loadReferenceButton = TextButton({
 	Parent = actionsFrame,
 })
 
-mainPage.Parent = Widget.Pages
+loadReferenceButton.Activated:Connect(function()
+	Navigation.SetPage(References)
+end)
 
 Navigation.SetPage(mainPage)
 
-return nil
+return mainPage
