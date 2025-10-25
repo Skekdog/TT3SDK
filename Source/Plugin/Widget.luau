@@ -2,6 +2,7 @@ local GetPlugin = require("../Lib/GetPlugin")
 local Frame = require("../Lib/UI/Components/Frame")
 local TextButton = require("../Lib/UI/Components/TextButton")
 local TextLabel = require("../Lib/UI/Components/TextLabel")
+local LoadTemplate = require("./Core/LoadTemplate")
 
 local plugin = GetPlugin
 
@@ -39,7 +40,7 @@ do
 	listLayout.Parent = frame
 end
 
-local title = TextLabel({
+TextLabel({
 	NoStroke = true,
 	Text = "<b>Traitor Town 3 SDK</b>",
 	FontSize = 32,
@@ -75,6 +76,8 @@ local loadTemplateButton = TextButton({
 	AutomaticSize = Enum.AutomaticSize.Y,
 	Parent = actionsFrame,
 })
+
+loadTemplateButton.Activated:Connect(LoadTemplate)
 
 local loadReferenceButton = TextButton({
 	Text = "Load Reference",
