@@ -1,5 +1,4 @@
-local ChangePage = require("@self/ChangePage")
-local MainPage = require("@self/Pages/MainPage")
+local Navigation = require("@self/Navigation")
 local GetPlugin = require("../Lib/GetPlugin")
 local Frame = require("../Lib/UI/Components/Frame")
 
@@ -23,20 +22,35 @@ widget.Enabled = false
 
 local frame = Frame({
 	Parent = widget,
-	CornerRadius = false,
-	NoStroke = true,
+	IsContainer = true,
 
 	Padding = {
 		Top = 5,
 	}
 })
 
+local pages = Frame({
+	Name = "Pages",
+	Parent = frame,
+	LayoutOrder = 2,
+
+	IsContainer = true,
+})
+
+Navigation.NavBar.Parent = frame
+
+do
+	local listLayout = Instance.new("UIListLayout")
+	listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	listLayout.Parent = frame
+end
+
 function Widget.ToggleWidget(enabled: boolean?): ()
 	widget.Enabled = if typeof(enabled) == "boolean" then enabled else not widget.Enabled
 end
 
 Widget.Widget = widget
-
-ChangePage(MainPage(frame))
+Widget.Frame = frame
+Widget.Pages = pages
 
 return Widget

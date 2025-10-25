@@ -1,11 +1,11 @@
 local Frame = require("../../../Lib/UI/Components/Frame")
 local TextButton = require("../../../Lib/UI/Components/TextButton")
-local TextLabel = require("../../../Lib/UI/Components/TextLabel")
 local LoadTemplate = require("../../Core/LoadTemplate")
-local ChangePage = require("../ChangePage")
+local Navigation = require("../Navigation")
+local Widget = require("./..")
 
 local mainPage = Frame({
-	Name = "MainPage",
+	Name = "Traitor Town 3 SDK",
 	Parent = false,
 
 	CornerRadius = false,
@@ -18,15 +18,6 @@ do
 	listLayout.Padding = UDim.new(0, 5)
 	listLayout.Parent = mainPage
 end
-
-TextLabel({
-	NoStroke = true,
-	Text = "<b>Traitor Town 3 SDK</b>",
-	FontSize = 32,
-	AutomaticSize = Enum.AutomaticSize.Y,
-	TextTruncate = Enum.TextTruncate.AtEnd,
-	Parent = mainPage,
-})
 
 local actionsFrame = Frame({
 	NoStroke = true,
@@ -65,11 +56,8 @@ local loadReferenceButton = TextButton({
 	Parent = actionsFrame,
 })
 
-ChangePage(mainPage)
+mainPage.Parent = Widget.Pages
 
-local function MainPage(frame: Frame): Frame
-	mainPage.Parent = frame
-	return mainPage
-end
+Navigation.SetPage(mainPage)
 
-return MainPage
+return nil

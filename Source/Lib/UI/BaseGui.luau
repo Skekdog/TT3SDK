@@ -29,6 +29,7 @@ export type BaseGuiParams = {
 	Size: UDim2?,
 	AutomaticSize: Enum.AutomaticSize?,
 
+	IsContainer: boolean?,
 	CornerRadius: UDim | false?,
 	NoStroke: boolean?,
 	Padding: Padding?,
@@ -39,6 +40,14 @@ export type BaseGuiParams = {
 }
 
 local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
+	if params.IsContainer then
+		params.Transparency = 1
+		params.NoStroke = true
+		params.Padding = nil
+		params.Style = false
+		params.CornerRadius = false
+	end
+
 	gui.Name = params.Name or gui.ClassName
 
 	gui.BackgroundTransparency = params.Transparency or 0
