@@ -44,10 +44,10 @@ function Navigation.SetPage(page: Frame): ()
 
 	title.Text = "<b>" .. page.Name .. "</b>"
 
-	lastPage = pageLayout.CurrentPage :: Frame?
-	if page == lastPage then
+	if pageLayout.CurrentPage == page then
 		return
 	end
+	lastPage = pageLayout.CurrentPage :: Frame?
 
 	pageLayout:JumpTo(page)
 

@@ -10,8 +10,14 @@ local mainPage = Frame({
 	LayoutOrder = -1,
 	Parent = Widget.Pages,
 
-	CornerRadius = false,
-	NoStroke = true,
+	IsContainer = true,
+
+	Padding = {
+		Left = 5,
+		Right = 5,
+		Top = 5,
+		Bottom = 5,
+	},
 })
 
 do
@@ -21,32 +27,11 @@ do
 	listLayout.Parent = mainPage
 end
 
-local actionsFrame = Frame({
-	NoStroke = true,
-	Transparency = 1,
-
-	Padding = {
-		Left = 5,
-		Right = 5,
-		Top = 5,
-		Bottom = 5,
-	},
-
-	Parent = mainPage,
-})
-
-do
-	local listLayout = Instance.new("UIListLayout")
-	listLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	listLayout.Padding = UDim.new(0, 5)
-	listLayout.Parent = actionsFrame
-end
-
 local loadTemplateButton = TextButton({
 	Text = "Load Template",
 	FontSize = 24,
 	AutomaticSize = Enum.AutomaticSize.Y,
-	Parent = actionsFrame,
+	Parent = mainPage,
 })
 
 loadTemplateButton.Activated:Connect(LoadTemplate)
@@ -55,7 +40,7 @@ local loadReferenceButton = TextButton({
 	Text = "Load Reference",
 	FontSize = 24,
 	AutomaticSize = Enum.AutomaticSize.Y,
-	Parent = actionsFrame,
+	Parent = mainPage,
 })
 
 loadReferenceButton.Activated:Connect(function()

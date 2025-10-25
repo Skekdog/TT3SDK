@@ -43,7 +43,6 @@ local function BaseGui<T>(gui: T & GuiObject, params: BaseGuiParams): T
 	if params.IsContainer then
 		params.Transparency = 1
 		params.NoStroke = true
-		params.Padding = nil
 		params.Style = false
 		params.CornerRadius = false
 	end
