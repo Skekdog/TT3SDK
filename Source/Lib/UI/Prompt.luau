@@ -25,13 +25,6 @@ local backgroundFrame = Frame({
 backgroundFrame.BackgroundColor3 = Color3.new(0, 0, 0)
 
 local frame = Frame({
-	PaddingParams = {
-		Left = UDim.new(0, 4),
-		Right = UDim.new(0, 4),
-		Top = UDim.new(0, 4),
-		Bottom = UDim.new(0, 4),
-	},
-
 	ZIndex = 10,
 
 	Size = UDim2.fromScale(0.5, 0.5),
@@ -60,7 +53,7 @@ end
 local titleLabel = TextLabel({
 	Text = "",
 	AutomaticSize = Enum.AutomaticSize.Y,
-	FontSize = 24,
+	FontSize = "Title",
 
 	IsContainer = true,
 
@@ -99,11 +92,9 @@ do
 end
 
 local responsesFrame = Frame({
-	PaddingParams = {
-		Left = UDim.new(0, 10),
-		Right = UDim.new(0, 10),
-		Top = UDim.new(0.25, 0),
-		Bottom = UDim.new(0.25, 0),
+	Padding = {
+		Left = UDim.new(0, 4),
+		Right = UDim.new(0, 4),
 	},
 
 	LayoutOrder = 3,
@@ -131,7 +122,7 @@ local confirmButton = TextButton({
 
 	ZIndex = 12,
 
-	FontSize = 36,
+	FontSize = "LargerButton",
 
 	Name = "ConfirmButton",
 	Parent = responsesFrame,
@@ -150,7 +141,7 @@ local cancelButton = TextButton({
 
 	ZIndex = 12,
 
-	FontSize = 36,
+	FontSize = "LargerButton",
 
 	Name = "CancelButton",
 	Parent = responsesFrame,

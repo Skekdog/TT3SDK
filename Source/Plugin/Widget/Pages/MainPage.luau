@@ -23,7 +23,7 @@ end
 
 local loadTemplateButton = TextButton({
 	Text = "Load Template",
-	FontSize = 24,
+	FontSize = "Button",
 	AutomaticSize = Enum.AutomaticSize.Y,
 	Parent = mainPage,
 })
@@ -38,7 +38,7 @@ end)
 
 local loadReferenceButton = TextButton({
 	Text = "Load Reference",
-	FontSize = 24,
+	FontSize = "Button",
 	AutomaticSize = Enum.AutomaticSize.Y,
 	Parent = mainPage,
 })

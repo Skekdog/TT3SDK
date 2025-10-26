@@ -15,7 +15,7 @@ Navigation.NavBar = Frame({
 
 local title = TextLabel({
 	NoStroke = true,
-	FontSize = 32,
+	FontSize = "Title",
 	AutomaticSize = Enum.AutomaticSize.Y,
 	TextTruncate = Enum.TextTruncate.AtEnd,
 	Text = "NavBar",

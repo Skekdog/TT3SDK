@@ -5,24 +5,33 @@ export type TextSizeConstraints = {
 	Max: number?,
 }
 
+export type FontSize = number | "Title" | "Button" | "LargerButton" | "Body"
+
+local fontSizes: {[FontSize]: number} = {
+	["Title"] = 36,
+	["Button"] = 24,
+	["LargerButton"] = 32,
+	["Body"] = 24,
+}
+
 export type BaseTextParams = BaseGui.BaseGuiParams & {
 	Text: string,
 
-	FontSize: number?,
+	FontSize: FontSize?,
 	TextWrapped: boolean?,
 	TextTruncate: Enum.TextTruncate?,
 
 	TextSizeConstraints: TextSizeConstraints?,
 }
 
-local function BaseText<T>(gui: T & GuiObject & (TextLabel | TextButton | TextBox), params: BaseTextParams): ()
+local function BaseText<T>(gui: T & (TextLabel | TextButton | TextBox), params: BaseTextParams): ()
 	BaseGui(gui, params)
 
 	gui.FontFace = Font.fromEnum(Enum.Font.BuilderSans)
 	gui.RichText = true
 
 	if params.FontSize then
-		gui.TextSize = params.FontSize
+		gui.TextSize = if typeof(params.FontSize) == "number" then params.FontSize else fontSizes[params.FontSize]
 		if params.TextTruncate ~= nil and params.TextTruncate ~= Enum.TextTruncate.None then
 			gui.TextTruncate = params.TextTruncate
 		else
